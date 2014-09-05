@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.teamtreehouse.meetup.integration.Twitter;
+
 
 @Controller
 public class ImprovController {
@@ -16,7 +18,9 @@ public class ImprovController {
 
 	@RequestMapping("improv")
 	public String improv(@RequestParam(value="name", required=true) String name, Model model) {
+		Twitter twitter = new Twitter();
 		model.addAttribute("name", name);
+		model.addAttribute("tweets", twitter.search(name));
 		return "improv";
 	}
 }
