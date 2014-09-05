@@ -10,5 +10,18 @@
     		<p th:text="${status.getText()}" />
     	</li>
     </ul>
+    <h2>Google Results</h2>
+    <ul>
+    	<li th:each="item : ${googleResults}">
+    		<span th:utext="${item.getHtmlSnippet()}" />
+    		<a th:href="${item.getLink()}" th:utext="${item.getHtmlTitle()}" />
+    	</li>
+    </ul>
+    <h2>Google Image Results</h2>
+    <ul>
+    	<li th:each="item : ${googleImages}">
+    		<img th:src="${item.getImage().getThumbnailLink()}" />
+    	</li>
+    </ul>
 </body>
 </html>

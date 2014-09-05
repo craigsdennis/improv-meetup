@@ -41,6 +41,11 @@
            <artifactId>twitter4j-core</artifactId>
            <version>[4.0,)</version>
        	</dependency>
+       	<dependency>
+      		<groupId>com.google.apis</groupId>
+      		<artifactId>google-api-services-customsearch</artifactId>
+      		<version>v1-rev42-1.19.0</version>
+    	</dependency>
 	</dependencies>
 
 	<properties>
