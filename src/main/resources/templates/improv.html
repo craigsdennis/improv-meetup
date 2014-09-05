@@ -4,5 +4,11 @@
 </head>
 <body>
 	<h1 th:inline="text">Learning with [[${name}]]</h1>
+	<h2>Tweets</h2>
+    <ul>
+    	<li th:each="status : ${tweets}">
+    		<p th:text="${status.getText()}" />
+    	</li>
+    </ul>
 </body>
 </html>
