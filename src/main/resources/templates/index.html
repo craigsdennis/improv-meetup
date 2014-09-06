@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" href="/css/vendor/bootstrap/bootstrap.min.css" />
+    <script src="/js/vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/js/vendor/bootstrap/bootstrap.min.js"></script>
 </head>
 <body>
-	<form action="/improv" method="GET">
-		<input type="text" name="name" placeholder="Enter a person, place or thing to learn with today..." />
-		<button>Learn</button>
-	</form>
+	<div class="container">
+		<div class="page-header">
+			<h1>Meetup</h1>
+		</div>
+		<div class="jumbotron">
+	  		<h1>Lessons as unique as you are</h1>
+	 		<p>It's all up to you.  Pick a person, place, or thing to learn with today.</p>
+	 		<form action="/improv" method="GET" role="form">
+	 			<div class="row">
+	 				<div class="col-md-8">
+		 				<input type="text" class="form-control input-lg" name="name" placeholder="Nicholas Cage, turtles, Gobstoppers..." />
+	 				</div>
+	 				<div class="col-md-4">
+		 				<button class="btn btn-primary btn-lg" role="button">Get Started</button>
+	 				</div>
+	 			</div>
+  		</form>
+		</div>		
+	</div>
 </body>
 
 </html>
