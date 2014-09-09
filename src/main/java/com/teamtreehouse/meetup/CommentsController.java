@@ -24,13 +24,29 @@ public class CommentsController {
             { "craig@teamtreehouse.com", "Craig Dennis" },
             { "andrew@teamtreehouse.com", "Andrew Chalkers" },
             { "kenneth@teamtreehouse.com", "Kenneth Love" },
-            { "dave@teamtreehouse.com", "Dave McFarland" }, };
+            { "dave@teamtreehouse.com", "Dave McFarland" }, 
+            { "ben@teamtreehouse.com", "Ben Jakuben" },
+            { "jason@teamtreehouse.com", "Jason Seifer" },
+            { "amit@teamtreehouse.com", "Amit Bijlani" },
+            { "guil@teamtreehouse.com", "Guil Hernandez" },
+            { "hampton@teamtreehouse.com", "Hampton Paulk" },
+            { "joy@teamtreehouse.com", "Joy Kesten" },
+            { "nick@teamtreehouse.com", "Nick Petit" },
+            { "pasan@teamtreehouse.com", "Pasan Premaratne"},
+            { "zac@teamtreehouse.com", "Zac Gordon"},
+    };
     private String[] mComments = {
             "I love {0}!  I seriously cannot get enough!",
             "{0}?  Of course I love it!",
             "I have to admit, I have seen better things than {0}.",
             "If I had my choice, I would never choose {0}.",
-            "Sometimes {0} scares me.", "{0}?  Delight!", };
+            "Sometimes {0} scares me.",
+            "{0}?  Delight!",
+            "I am not in touch with my feelings",
+            "I am so tired of all this {0} hoopla",
+            "What is {0}?",
+            "Really? {0} ???",
+    };
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -40,7 +56,7 @@ public class CommentsController {
             @RequestParam(value = "since", required = false) String since) {
         // Fake the since concept
         List<Comment> comments = new ArrayList<Comment>();
-        int total = mRandom.nextInt(5) + 1;
+        int total = mRandom.nextInt(3) + 1;
         for (int i = 0; i < total; i++) {
             Comment com = new Comment();
             String[] fakeUser = mUsers[mRandom.nextInt(mUsers.length)];
