@@ -46,6 +46,8 @@ public class CommentsController {
             "I am so tired of all this {0} hoopla",
             "What is {0}?",
             "Really? {0} ???",
+            "The best thing in the world might be {0}",
+            "Oh boy {0}!!!",
     };
 
     @RequestMapping(method = RequestMethod.GET)

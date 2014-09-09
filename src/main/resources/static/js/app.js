@@ -15,7 +15,6 @@ $(function() {
 				return commentTemplate(comment);
 			});
 			_.each(newComments, function(comment) {
-				debugger;
 				var $comment = $(comment);
 				$comment.hide();
 				$comments.prepend($comment);
