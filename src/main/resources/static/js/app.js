@@ -1,9 +1,5 @@
 $(function() { 
-	var commentTemplate = _.template(
-		'<li class="list-group-item"><div class="row">' +
-		'<div class="col-md-2"><img src="<%= posterAvatar %>" class="img-circle" /></div>' +
-		'<div><blockquote><p><%= message %></p><footer><%= poster %></footer></blockquote></div>' + 
-		'</div></li>');
+	var commentRowTemplate = Handlebars.compile($('#commentRowTmpl').html());
 	var loadMoarComments = function() {
 		var $comments = $('#comments');
 		var data = $comments.data();
@@ -12,7 +8,7 @@ $(function() {
 		});
 		dfd.then(function(data) {
 			var newComments = _.map(data, function(comment) {
-				return commentTemplate(comment);
+				return commentRowTemplate(comment);
 			});
 			_.each(newComments, function(comment) {
 				var $comment = $(comment);
@@ -37,12 +33,13 @@ $(function() {
 		$link = $(this); 
 		if (areCommentsSimulating) {
 			areCommentsSimulating = false;
-			$link.text('Start comment simulation');
+			$link.empty();
+			$link.append($('<span />').addClass('glyphicon glyphicon-play'));
 		} else {			
 			areCommentsSimulating = true;
 			simulateComments();
-			$link.text('Simulating...click to stop');
-		}
-		
+			$link.empty();
+			$link.append($('<span />').addClass('glyphicon glyphicon-pause'));
+		} 
 	});
 });

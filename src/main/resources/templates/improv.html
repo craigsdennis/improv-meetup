@@ -5,6 +5,7 @@
     <script src="/js/vendor/jquery/jquery-1.11.1.min.js"></script>
     <script src="/js/vendor/bootstrap/bootstrap.min.js"></script>
     <script src="/js/vendor/underscore/underscore-min.js"></script>
+    <script src="/js/vendor/handlebars/handlebars-v2.0.0.js"></script>
     <script src="/js/app.js"></script>
 </head>
 <body>
@@ -58,8 +59,25 @@
 	      </div>
 		</div>
 	    <h2>Comments from our teachers</h2>
-        <p><a class="btn btn-primary" id="commentSimulation" role="button">Start comment simulation</a></p>
+        <p>
+            <a class="btn btn-primary" id="commentSimulation" role="button">
+                <span class="glyphicon glyphicon-play-circle"></span>
+           </a>
+        </p>
         <ul id="comments" class="list-group" th:attr="data-regarding=${name}" />
 	</div>
+	<script id="commentRowTmpl" type="text/x-handlebars-template">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{ posterAvatar }}" class="img-circle" />
+                </div>
+                <blockquote>
+                    <p>{{{ message }}}</p>
+                    <footer>{{ poster }}</footer></blockquote>
+              
+            </div>
+        </li>
+    </script>
 </body>
 </html>
