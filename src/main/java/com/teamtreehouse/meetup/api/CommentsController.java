@@ -1,4 +1,4 @@
-package com.teamtreehouse.meetup;
+package com.teamtreehouse.meetup.api;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
