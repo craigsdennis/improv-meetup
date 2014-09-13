@@ -21,10 +21,12 @@ public class TweetController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<Status> search(@RequestParam(value = "q", required = true) String q) {
+    public List<Status> search(
+            @RequestParam(value="q", required=true) String q,
+            @RequestParam(value="sinceId", required=false, defaultValue="0") String sinceId) {
         Twitter t = new Twitter();
-        return t.search(q);
+        return t.search(q, Long.parseLong(sinceId));
     }
-            
-    
+
+
 }
