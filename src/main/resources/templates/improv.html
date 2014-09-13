@@ -13,6 +13,13 @@
 		<div class="page-header">
 			<h1 th:inline="text">Learning with [[${name}]] <small>Debugging with Chrome Developer Tools</small></h1>
 		</div>
+		<div class="row">
+		<div class="jumbotron">
+		  <h2>We have learned <span id="learningCount">0</span> things thanks to <span th:text="${name}" />.</h2>
+		  <button class="btn btn-success" id="learnIncrementer">Increment learning counter</button>
+		  <button class="btn btn-danger" id="brokenButton">This button is broken</button>
+		</div>
+		</div>
 	    <!-- Google Image results -->
 	    <div class="row">
 	       <div class="col-md-3" th:each="item : ${googleImages}">
