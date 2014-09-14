@@ -102,11 +102,15 @@ var App = {
 				$tweet.hide();
 				$tweets.prepend($tweet);
 				$tweet.show('slow');
+				$tweet.find('button.close').click(function(evt) {
+					evt.preventDefault();
+					$(this).parents('li.list-group-item').remove();
+				});
 				$tweet.on('mouseover', function(evt) {
 					$tweet.find('.hide').removeClass('hide');
 				});
 				$tweet.on('mouseout', function(evt) {
-					$tweet.find('div:not(.row):first, footer').addClass('hide');
+					$tweet.find('div:not(.row):first, footer, button.close').addClass('hide');
 				});
 				// Only recent ones
 				$tweets.find('li').slice(10).remove();
