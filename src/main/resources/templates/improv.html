@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title th:text="${name} + '!!!!'"></title>
     <link rel="stylesheet" href="/css/vendor/bootstrap/bootstrap.min.css" />
     <script src="/js/vendor/jquery/jquery-1.11.1.min.js"></script>
-    <script src="/js/vendor/bootstrap/bootstrap.min.js"></script>
     <script src="/js/vendor/underscore/underscore-min.js"></script>
     <script src="/js/vendor/handlebars/handlebars-v2.0.0.js"></script>
+    <script src="/js/vendor/bootstrap/bootstrap.min.js"></script>
     <script src="/js/app.js"></script>
 </head>
 <body>
@@ -14,64 +15,41 @@
 			<h1 th:inline="text">Learning with [[${name}]] <small>Debugging with Chrome Developer Tools</small></h1>
 		</div>
 		<div class="row">
-		<div class="jumbotron">
-		  <h2>We have learned <span id="learningCount">0</span> things thanks to <span th:text="${name}" />.</h2>
-		  <button class="btn btn-success" id="learnIncrementer">Increment learning counter</button>
-		  <button class="btn btn-danger" id="brokenButton">This button is broken</button>
-		</div>
+			<div class="jumbotron">
+			  <h2>We have learned <span id="learning-count">0</span> things thanks to <span th:text="${name}"></span>.</h2>
+			  <button class="btn btn-success" id="learn-incrementer">Increment learning counter</button>
+			  <button class="btn btn-danger" id="broken-button">This button is broken</button>
+			</div>
 		</div>
 	    <!-- Google Image results -->
 	    <div class="row">
-	       <div class="col-md-3" th:each="item : ${googleImages}">
-	           <div class="thumbnail">
-		    		<img th:src="${item.getImage().getThumbnailLink()}"/>	           
-	           </div>
-	       </div>
-	    </div>
+	       <div th:each="item : ${googleImages}" class="col-md-2">
+                <img th:src="${item.getImage().getThumbnailLink()}" th:alt="${item.getTitle()}" class="img-responsive"/>            
+           </div>
+		</div>
 		<div class="row">
 		  <div class="col-md-6">
 	        <h2>Tweets</h2>
-	        <ul class="list-group">
-	            <li th:each="status : ${tweets}"
-	                th:object="${status.getUser()}"
-	                class="list-group-item">
-	                <div class="row">
-	                   <div class="col-md-2">
-	                       <div class="thumbnail">
-		                       <img th:src="*{getProfileImageURL()}" />
-	                       </div>
-	                   </div>
-	                   <div class="col-md-8">
-		                   <blockquote>
-		                      <p th:text="${status.getText()}" />
-		                      <footer>
-		                          <a th:href="'http://twitter.com/' + *{getScreenName()}" th:text="*{getScreenName()}" />
-		                          via <cite th:utext="${status.getSource()}" /> 
-		                      </footer>
-		                   </blockquote>        
-	                   </div>
-	                </div>
-	            </li>
-	        </ul>
+	        <ul class="list-group" id="tweets" th:attr="data-q=${name}"></ul>
 	      </div>
 	      <div class="col-md-6">
 	        <h2>Google Results</h2>
 	        <ul class="list-group">
 	            <li th:each="item : ${googleResults}"
 	                class="list-group-item">
-	                <p><a th:href="${item.getLink()}" th:utext="${item.getHtmlTitle()}" /></p>
-	                <span th:utext="${item.getHtmlSnippet()}" />
+	                <p><a th:href="${item.getLink()}" th:utext="${item.getHtmlTitle()}"></a></p>
+	                <span th:utext="${item.getHtmlSnippet()}"></span>
 	            </li>
 	        </ul>
 	      </div>
 		</div>
 	    <h2>Comments from our teachers</h2>
         <p>
-            <a class="btn btn-primary" id="commentSimulation" role="button">
+            <a class="btn btn-primary" id="comment-simulation" role="button">
                 <span class="glyphicon glyphicon-play-circle"></span>
            </a>
         </p>
-        <ul id="comments" class="list-group" th:attr="data-regarding=${name}" />
+        <ul id="comments" class="list-group" th:attr="data-regarding=${name}"></ul>
 	</div>
 	<script id="commentRowTmpl" type="text/x-handlebars-template">
         <li class="list-group-item">
@@ -83,6 +61,24 @@
                     <p>{{{ message }}}</p>
                     <footer>{{ poster }}</footer></blockquote>
               
+            </div>
+        </li>
+    </script>
+    <script id="tweetRowTmpl" type="text/x-handlebars-template">
+       <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-2 hide">
+                    <img src="{{user.biggerProfileImageURL}}" class="img-circle" />
+                </div>
+                <div class="col-md-10">
+                    <blockquote>
+                        <p>{{text}}</p>
+                        <footer class="hide">
+                            <a href="'http://twitter.com/{{user.screenName}}">{{user.screenName}}</a>
+                                  via <cite>{{{source}}}</cite> 
+                        </footer>
+                     </blockquote>        
+                </div>
             </div>
         </li>
     </script>

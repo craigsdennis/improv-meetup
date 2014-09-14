@@ -2,6 +2,7 @@ var App = {
 	templates: {},
 	state: {
 		commentsAreSimulating: false,
+		tweetRefreshRate: 10000,
 	},
 	init: function() {
 		$('script[type="text/x-handlebars-template"]').each(function() {
@@ -9,6 +10,7 @@ var App = {
 			App.templates[$script.attr('id')] = Handlebars.compile($script.html());
 		});
 		this.bindEvents();
+		this.refreshTweets();
 	},
 	bindEvents: function() {
 		this.bindCommentEvents();
@@ -16,7 +18,7 @@ var App = {
 	},
 	bindCommentEvents: function() {
 		var app = this;
-		$('#commentSimulation').on('click', function(evt) {
+		$('#comment-simulation').on('click', function(evt) {
 			evt.preventDefault();
 			var $link = $(this);
 			if (app.state.commentsAreSimulating) {
@@ -32,13 +34,13 @@ var App = {
 		});
 	},
 	bindLearningEvents: function() {
-		$('#learnIncrementer').click(function(evt) {
+		$('#learn-incrementer').click(function(evt) {
 			evt.preventDefault();
-			var currentCount = parseInt($('#learningCount').text(), 10);
+			var currentCount = parseInt($('#learning-count').text(), 10);
 			currentCount += 1;
-			$('#learningCount').text(currentCount);
+			$('#learning-count').text(currentCount);
 		});
-		$('#brokenButton').click(function(evt) {
+		$('#broken-button').click(function(evt) {
 			console.warn('I warned you this button was broken.');
 			alert(doucment.body.text);
 		});
@@ -49,8 +51,8 @@ var App = {
 		var dfd = $.ajax('/api/comments', {
 			data: data
 		});
-		dfd.then(function(data) {
-			var newComments = _.map(data, function(comment) {
+		dfd.then(function(results) {
+			var newComments = _.map(results, function(comment) {
 				return App.templates.commentRowTmpl(comment);
 			});
 			_.each(newComments, function(comment) {
@@ -71,7 +73,52 @@ var App = {
 				app.simulateComments();
 			}
 		}, _.random(1500, 4000));
-	
+	},
+	loadNewTweets: function() {
+		var $tweets = $('#tweets');
+		var data = $tweets.data();
+		var dfd = $.ajax('/api/tweets/search', {
+			data: data
+		});
+		dfd.then(function(results) {
+			// For some reason, Twitter is returning the sinceId
+			if (results.length && data.sinceId) {
+				results = _.reject(results, function(result) {
+					return result.id === data.sinceId;
+				});				
+			}
+			if (results.length) {
+				// Store this for refresh
+				$tweets.data('sinceId', results[0].id);
+			} else {
+				console.log('No new tweets');
+				return;
+			}
+			var newTweets = _.map(results, function(result) {
+				return App.templates.tweetRowTmpl(result);
+			});
+			_.each(newTweets, function(tweet) {
+				var $tweet = $(tweet);
+				$tweet.hide();
+				$tweets.prepend($tweet);
+				$tweet.show('slow');
+				$tweet.on('mouseover', function(evt) {
+					$tweet.find('.hide').removeClass('hide');
+				});
+				$tweet.on('mouseout', function(evt) {
+					$tweet.find('div:not(.row):first, footer').addClass('hide');
+				});
+				// Only recent ones
+				$tweets.find('li').slice(10).remove();
+			});
+		});
+	},
+	refreshTweets: function() {
+		var app = this;
+		this.loadNewTweets();
+		_.delay(function() {
+			app.refreshTweets();
+		}, this.state.tweetRefreshRate);
 	}
 };
 
