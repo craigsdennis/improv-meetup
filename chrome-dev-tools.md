@@ -1,4 +1,4 @@
-Chrome Dev Tools Meetup
+[Chrome Dev Tools](https://developer.chrome.com/devtools) Meetup
 -----------------------
 
 ## Works on any page
@@ -6,6 +6,7 @@ Chrome Dev Tools Meetup
 - [ ] Right click and inspect element
 - [ ] Edit attribute
 - [ ] Add attribute
+- [ ] Magnifying glass
 
 ## Fix images
 - [ ] Edit as HTML
@@ -14,7 +15,7 @@ Chrome Dev Tools Meetup
 - [ ] Look at Elements > Styles and steal them
 - [ ] Use the magnifying glass to autoselect
 
-## Introduce console
+## Console tab
 - [ ] Execute some JS
 - [ ] Context: this === window
 - [ ] Show off autocomplete/intellisense
@@ -23,7 +24,7 @@ Chrome Dev Tools Meetup
 - [ ] $ and $$ are always available (sometimes jQuery gets things confused)
 - [ ] Hover over the results
 
-## Introduce breakpoints
+## Breakpoints
 - [ ] Sources tab
 - [ ] Cmd - O to open a file
 - [ ] Gutter click to pause in context
@@ -32,3 +33,11 @@ Chrome Dev Tools Meetup
 - [ ] Edit breakpoint for certain condition
 - [ ] Break on exception
 - [ ] Break on caught exceptions
+- [ ] Add debugger statement
+- [ ] 500 ms continue
+- [ ] DOM Manipulation (Right click break on)
+- [ ] XHR breakpoint
+- [ ] Walk call stack, talk about [source maps](https://developer.chrome.com/devtools/docs/javascript-debugging#source-maps)
+
+## Decorating code
+- [ ] [Console API](https://developer.chrome.com/devtools/docs/javascript-debugging#source-maps)
