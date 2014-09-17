@@ -2,7 +2,7 @@
 -----------------------
 
 ## Works on any page
-- [ ] Cmd - Shift - J or Ctrl - Shift - J to open
+- [ ] Cmd - Option - J or Ctrl - Shift - J to open
 - [ ] Right click and inspect element
 - [ ] Edit attribute
 - [ ] Add attribute
@@ -23,6 +23,7 @@
 - [ ] $_, $1 and inspect(el);
 - [ ] $ and $$ are always available (sometimes jQuery gets things confused)
 - [ ] Hover over the results
+- [ ] Escape as a hotkey to open and close
 
 ## Breakpoints
 - [ ] Sources tab
@@ -38,6 +39,16 @@
 - [ ] DOM Manipulation (Right click break on)
 - [ ] XHR breakpoint
 - [ ] Walk call stack, talk about [source maps](https://developer.chrome.com/devtools/docs/javascript-debugging#source-maps)
+- [ ] debug(App.refreshTweets);
+
+## Network tab
+- [ ] Check out the traffic, explore headers and results
+- [ ] logXHRequests (right click in console)
+
+## Resources tab
+- [ ] Show off localStorage
 
 ## Decorating code
 - [ ] [Console API](https://developer.chrome.com/devtools/docs/javascript-debugging#source-maps)
+
+
