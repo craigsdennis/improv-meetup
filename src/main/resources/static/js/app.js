@@ -3,6 +3,7 @@ var App = {
 	state: {
 		commentsAreSimulating: false,
 		tweetRefreshRate: 10000,
+		noisyTweets: false
 	},
 	init: function() {
 		$('script[type="text/x-handlebars-template"]').each(function() {
@@ -44,6 +45,16 @@ var App = {
 			console.warn('I warned you this button was broken.');
 			alert(doucment.body.text);
 		});
+		$('#debugger-button').click(function(evt) {
+			console.warn('I am going to hardcode a debugger');
+			debugger;
+			console.warn('Here comes a super long loop');
+			for (var i = 0; i < 1000; i++) {
+				console.info('count is', i);
+			}
+			debugger;
+			console.info('All done sorry about all that');
+		})
 	},
 	loadMoarComments: function() {
 		var $comments = $('#comments');
@@ -119,7 +130,13 @@ var App = {
 	},
 	refreshTweets: function() {
 		var app = this;
+		if (app.state.noisyTweets) {
+			console.time('Tweets refreshed');			
+		}
 		this.loadNewTweets();
+		if (app.state.noisyTweets) {
+			console.timeEnd('Tweets refreshed');
+		}
 		_.delay(function() {
 			app.refreshTweets();
 		}, this.state.tweetRefreshRate);
